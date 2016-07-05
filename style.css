@@ -1,7 +1,36 @@
 /*
 Material Design Icons
 */
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18 { font-size: 18px; color:white}
+.material-icons.md-24 { font-size: 24px; color:white}
+.material-icons.md-36 { font-size: 36px; color:white}
+.material-icons.md-48 { font-size: 48px; color:white}
+ /*
+* Background
+*/
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+.text-header {
+    margin-right: 2%;
+}
+
+.sub-header {
+    padding-top: .5%;
+    padding-bottom: .5%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.page-body {
+    margin-left: 3%;
+    margin-right: 3%;
+}
