@@ -8,17 +8,6 @@ Material Design Icons
  /*
 * Background
 */
-
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-
-  main {
-    flex: 1 0 auto;
-  }
-
 .text-header {
     margin-right: 2%;
 }
@@ -33,4 +22,14 @@ Material Design Icons
 .page-body {
     margin-left: 3%;
     margin-right: 3%;
+}
+
+.sub-header .date-range {
+    float:right;
+    display: inline;
+    margin-right: .5%
+}
+
+.flex-nav {
+    display: flex;
 }
