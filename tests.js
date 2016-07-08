@@ -1,0 +1,150 @@
+'use strict';
+
+var Shuffle = window.shuffle;
+
+// ES7 will have Array.prototype.includes.
+function arrayIncludes(array, value) {
+  return array.indexOf(value) !== -1;
+}
+
+// Convert an array-like object to a real array.
+function toArray(thing) {
+  return Array.prototype.slice.call(thing);
+}
+
+var Demo = function (element) {
+  this.schools = toArray(document.querySelectorAll('.js-school input'));
+  this.levels = toArray(document.querySelectorAll('.js-level button'));
+
+  this.shuffle = new Shuffle(element, {
+    easing: 'cubic-bezier(0.165, 0.840, 0.440, 1.000)', // easeOutQuart
+    sizer: '.the-sizer',
+  });
+
+  this.filters = {
+    schools: [],
+    levels: [],
+  };
+
+  this._bindEventListeners();
+};
+
+/**
+ * Bind event listeners for when the filters change.
+ */
+Demo.prototype._bindEventListeners = function () {
+  this._onSchoolChange = this._handleSchoolChange.bind(this);
+  this._onLevelChange = this._handleLevelChange.bind(this);
+
+  this.schools.forEach(function (input) {
+    input.addEventListener('change', this._onSchoolChange);
+  }, this);
+
+  this.levels.forEach(function (button) {
+    button.addEventListener('click', this._onLevelChange);
+  }, this);
+};
+
+/**
+ * Get the values of each checked input.
+ * @return {Array.<string>}
+ */
+Demo.prototype._getCurrentSchoolFilters = function () {
+  return this.schools.filter(function (input) {
+    return input.checked;
+  }).map(function (input) {
+    return input.value;
+  });
+};
+
+/**
+ * Get the values of each `active` button.
+ * @return {Array.<string>}
+ */
+Demo.prototype._getCurrentLevelFilters = function () {
+  return this.levels.filter(function (button) {
+    return button.classList.contains('active');
+  }).map(function (button) {
+    return button.getAttribute('data-value');
+  });
+};
+
+/**
+ * A shape input check state changed, update the current filters and filte.r
+ */
+Demo.prototype._handleSchoolChange = function () {
+  this.filters.schools = this._getCurrentSchoolFilters();
+  this.filter();
+};
+
+/**
+ * A color button was clicked. Update filters and display.
+ * @param {Event} evt Click event object.
+ */
+Demo.prototype._handleLevelChange = function (evt) {
+  var button = evt.currentTarget;
+
+  // Treat these buttons like radio buttons where only 1 can be selected.
+  if (button.classList.contains('active')) {
+    button.classList.remove('active');
+  } else {
+    this.levels.forEach(function (btn) {
+      btn.classList.remove('active');
+    });
+
+    button.classList.add('active');
+  }
+
+  this.filters.levels = this._getCurrentLevelFilters();
+  this.filter();
+};
+
+/**
+ * Filter shuffle based on the current state of filters.
+ */
+Demo.prototype.filter = function () {
+  if (this.hasActiveFilters()) {
+    this.shuffle.filter(this.itemPassesFilters.bind(this));
+  } else {
+    this.shuffle.filter(Shuffle.ALL_ITEMS);
+  }
+};
+
+/**
+ * If any of the arrays in the `filters` property have a length of more than zero,
+ * that means there is an active filter.
+ * @return {boolean}
+ */
+Demo.prototype.hasActiveFilters = function () {
+  return Object.keys(this.filters).some(function (key) {
+    return this.filters[key].length > 0;
+  }, this);
+};
+
+/**
+ * Determine whether an element passes the current filters.
+ * @param {Element} element Element to test.
+ * @return {boolean} Whether it satisfies all current filters.
+ */
+Demo.prototype.itemPassesFilters = function (element) {
+  var schools = this.filters.schools;
+  var levels = this.filters.levels;
+  var level = element.getAttribute('data-level');
+  var school = element.getAttribute('data-school');
+
+  // If there are active shape filters and this shape is not in that array.
+  if (schools.length > 0 && !arrayIncludes(schools, school)) {
+    return false;
+  }
+
+  // If there are active color filters and this color is not in that array.
+  if (levels.length > 0 && !arrayIncludes(levels, level)) {
+    return false;
+  }
+
+  return true;
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+  window.demo = new Demo(document.querySelector('.js-shuffle'));
+});

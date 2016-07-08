@@ -10,28 +10,31 @@
 	<body class="teal lighten-5">
 		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.js"></script>
 
 		<script type="text/javascript" src="javas.js"></script>
         
         <!-- Naviagtion Menu -->
-        <header class="flex-nav">
-            <nav class="blue darken-4 nav-wrapper flex-nav">
-                    <div>
-                        <ul id="slide-out" class="side-nav blue darken-4 text-header">
-                            <li><a href="C:/Users/msila/Desktop/HTML/website.html"><span class="white-text">About Me</span><i class="material-icons md-24" style="float:right;">account_circle</i></a></li>
-                            <li><a href="#!"><span class="white-text">Education</span><i class="material-icons md-24" style="float:right;">school</i></a></li>
-                            <li><a href="#!"><span class="white-text">Work Experience</span><i class="material-icons md-24" style="float:right;">work</i></a></li>
-                            <li><a href="#!"><span class="white-text">My Projects</span><i class="material-icons md-24" style="float:right;">memory</i></a></li>
-                            <li><a href="#!"><span class="white-text">Download Resume</span><i class="material-icons md-24" style="float:right;">get_app</i></a></li>
-                            <li><a href="https://www.linkedin.com/in/michaelarassilacs"><span class="white-text">Linkden</span><i class="material-icons md-24" style="float:right;">link</i></a></li>
-                        </ul>
-                        <a href="#" data-activates="slide-out" class="button-collapse show-on-large blue darken-4"><i class="material-icons">menu</i></a>
+        <header class="">
+            <div class="navbar-fixed">
+                <nav class="blue darken-4 nav-wrapper fixed">
+                        <div>
+                            <ul id="slide-out" class="side-nav blue darken-4 text-header">
+                                <li><a href="C:/Users/msila/Desktop/HTML/website.html"><span class="white-text">About Me</span><i class="material-icons md-24" style="float:right;">account_circle</i></a></li>
+                                <li><a href="#!"><span class="white-text">Education</span><i class="material-icons md-24" style="float:right;">school</i></a></li>
+                                <li><a href="#!"><span class="white-text">Work Experience</span><i class="material-icons md-24" style="float:right;">work</i></a></li>
+                                <li><a href="#!"><span class="white-text">My Projects</span><i class="material-icons md-24" style="float:right;">memory</i></a></li>
+                                <li><a href="#!"><span class="white-text">Download Resume</span><i class="material-icons md-24" style="float:right;">get_app</i></a></li>
+                                <li><a href="https://www.linkedin.com/in/michaelarassilacs"><span class="white-text">Linkden</span><i class="material-icons md-24" style="float:right;">link</i></a></li>
+                            </ul>
+                            <a href="#" data-activates="slide-out" class="button-collapse show-on-large blue darken-4"><i class="material-icons">menu</i></a>
+                        </div>
+                        <div class="header right text-header">
+                            <a href="education.html" >Education</a>
                     </div>
-                    <div class="header right text-header">
-                        <a href="education.html" >Education</a>
-                </div>
-                    
-            </nav>
+
+                </nav>
+            </div>
         </header>
         <main>
             <div class="page-body">
@@ -151,38 +154,75 @@
                     </div>
                 </div>
                 <div class="sub_section">
-                <div class="blue darken-4 sub-header">
-                    <span class="white-text date-range">Fall 2008 - Spring 2012</span>
-                    <h3 class="center white-text">Staples High School</h3>
-                </div>
-                <div class="container row">
-                    <div class="col l6 s12">
-                        <div class="slider">
-                            <ul class="slides">
-                                <li>
-                                    <img src="images/staples/font.jpg">
-                                </li>
-                                <li>
-                                    <img src="images/staples/front_ii.jpg">
-                                </li>
-                                <li>
-                                    <img src="images/staples/graduation.jpg">
-                                </li>
-                            </ul>
+                    <div class="blue darken-4 sub-header">
+                        <h3 class="center white-text">Courses</h3>
+                    </div>
+                    <div>
+                        <div>
+                            <h4>Filters:</h4>
+                            <div class="row">
+                                <a class="btn is-checked blue darken-4 waves-effect waves-light" data-filter="*">Show All</a>
+                            </div>
+                            <div class="row button-group" data-filter-group="course-level">
+                                <a class="btn is-checked blue darken-4 waves-effect waves-light" data-filter="">All Levels</a>
+                                <a class="btn blue darken-4 waves-effect waves-light" data-filter=".300">300 Level</a>
+                                <a class="btn blue darken-4 waves-effect waves-light" data-filter=".200">200 Level</a>
+                                <a class="btn blue darken-4 waves-effect waves-light" data-filter=".100">100 Level</a>
+                            </div>
+                            <div class="row button-group" data-filter-group="location">
+                                <a class="btn is-checked blue darken-4 waves-effect waves-light" data-filter="">All Locations</a>
+                                <a class="btn blue darken-4 waves-effect waves-light" data-filter=".ISU">Iowa State University</a>
+                                <a class="btn blue darken-4 waves-effect waves-light" data-filter=".LAF">Lafayette College</a>
+                                <a class="btn blue darken-4 waves-effect waves-light" data-filter=".TSU">Towson University</a>
+                            </div>
+                            <div class="row button-group" data-filter-group="date-taken">
+                                <a class="btn is-checked blue darken-4 waves-effect waves-light" data-filter="">All Years</a>
+                                <a class="btn blue darken-4 waves-effect waves-light" data-filter=".2013">2013</a>
+                                <a class="btn blue darken-4 waves-effect waves-light" data-filter=".2014">2014</a>
+                                <a class="btn blue darken-4 waves-effect waves-light" data-filter=".2014">2016</a>
+                                <a class="btn blue darken-4 waves-effect waves-light" data-filter=".2016">2016</a>
+                            </div>
+                        </div>
+                        <div class="grid" data-isotope='{ "itemSelector": ".element-item", "layoutMode": "fitRows" }'>
+                            <div class="grid-sizer"></div>
+                            <div class="element-item">
+                                <h3 class="name">Intro to Computer Science</h3>
+                                <p class="course-number">127</p>
+                                <p class="date-taken">Spring 2013</p>
+                                <p class="location">Towson University</p>
+                            </div>
+                            <div class="element-item">
+                                <h3 class="name">Team Software Development </h3>
+                                <p class="course-number">205</p>
+                                <p class="date-taken">Spring 2014</p>
+                                <p class="location">Lafayette College</p>
+                            </div>
+                            <div class="element-item">
+                                <h3 class="name">Fundementals of Programming</h3>
+                                <p class="course-number">227</p>
+                                <p class="date-taken">Fall 2014</p>
+                                <p class="location">Iowa State University</p>
+                            </div>
+                            <div class="element-item">
+                                <h3 class="name">Advanced Programming Techniques</h3>
+                                <p class="course-number">327</p>
+                                <p class="date-taken">Fall 2015</p>
+                                <p class="location">Iowa State University</p>
+                            </div>
+                            <div class="element-item">
+                                <h3 class="name">Computer Arch. and Machine Language</h3>
+                                <p class="course-number">321</p>
+                                <p class="date-taken">Spring 2016</p>
+                                <p class="location">Iowa State University</p>
+                            </div>
+                            <div class="element-item">
+                                <h3 class="name">Discrete Mathematics</h3>
+                                <p class="course-number">330</p>
+                                <p class="date-taken">Spring 2016</p>
+                                <p class="location">Iowa State University</p>
+                            </div>
                         </div>
                     </div>
-                <div class="col l6 offset-12 s12 blue darken-4">
-                    <div class="white-text">
-                        <p>
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                        </p>
-                        <p>
-                            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-
-                        </p>
-                    </div>
-                </div>
-                </div>
                 </div>
             </div>
         </main>
@@ -198,7 +238,7 @@
                     <div class="col l4 offset-12 s12">
                         <h5 class="white-text">External Links</h5>
                         <ul>
-                            <li class="white-text">Linkden</li>
+                            <li class="white-text">Linkedin</li>
                             <li class="white-text">Gitlab</li>
                             <li class="white-text">Github</li>
                             <li class="white-text">Personal Blog</li>
