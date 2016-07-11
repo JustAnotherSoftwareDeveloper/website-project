@@ -14,7 +14,7 @@ function toArray(thing) {
 
 var Demo = function (element) {
   this.schools = toArray(document.querySelectorAll('.js-school input'));
-  this.levels = toArray(document.querySelectorAll('.js-level button'));
+  this.levels = toArray(document.querySelectorAll('.js-level input'));
 
   this.shuffle = new Shuffle(element, {
     easing: 'cubic-bezier(0.165, 0.840, 0.440, 1.000)', // easeOutQuart
@@ -41,7 +41,7 @@ Demo.prototype._bindEventListeners = function () {
   }, this);
 
   this.levels.forEach(function (button) {
-    button.addEventListener('click', this._onLevelChange);
+    button.addEventListener('change', this._onLevelChange);
   }, this);
 };
 
@@ -62,10 +62,10 @@ Demo.prototype._getCurrentSchoolFilters = function () {
  * @return {Array.<string>}
  */
 Demo.prototype._getCurrentLevelFilters = function () {
-  return this.levels.filter(function (button) {
-    return button.classList.contains('active');
-  }).map(function (button) {
-    return button.getAttribute('data-value');
+  return this.levels.filter(function (input) {
+    return input.checked;
+  }).map(function (input) {
+    return input.value;
   });
 };
 
@@ -81,20 +81,7 @@ Demo.prototype._handleSchoolChange = function () {
  * A color button was clicked. Update filters and display.
  * @param {Event} evt Click event object.
  */
-Demo.prototype._handleLevelChange = function (evt) {
-  var button = evt.currentTarget;
-
-  // Treat these buttons like radio buttons where only 1 can be selected.
-  if (button.classList.contains('active')) {
-    button.classList.remove('active');
-  } else {
-    this.levels.forEach(function (btn) {
-      btn.classList.remove('active');
-    });
-
-    button.classList.add('active');
-  }
-
+Demo.prototype._handleLevelChange = function () {
   this.filters.levels = this._getCurrentLevelFilters();
   this.filter();
 };
