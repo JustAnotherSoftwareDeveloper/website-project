@@ -15,6 +15,7 @@ function toArray(thing) {
 var Demo = function (element) {
   this.schools = toArray(document.querySelectorAll('.js-school input'));
   this.levels = toArray(document.querySelectorAll('.js-level input'));
+  this.subjects = toArray(document.querySelectorAll('.js-subject input'));
 
   this.shuffle = new Shuffle(element, {
     easing: 'cubic-bezier(0.165, 0.840, 0.440, 1.000)', // easeOutQuart
@@ -24,6 +25,7 @@ var Demo = function (element) {
   this.filters = {
     schools: [],
     levels: [],
+    subjects: [],
   };
 
   this._bindEventListeners();
@@ -35,6 +37,7 @@ var Demo = function (element) {
 Demo.prototype._bindEventListeners = function () {
   this._onSchoolChange = this._handleSchoolChange.bind(this);
   this._onLevelChange = this._handleLevelChange.bind(this);
+  this._onSubjectChange = this._handleSubjectChange.bind(this);
 
   this.schools.forEach(function (input) {
     input.addEventListener('change', this._onSchoolChange);
@@ -43,6 +46,10 @@ Demo.prototype._bindEventListeners = function () {
   this.levels.forEach(function (button) {
     button.addEventListener('change', this._onLevelChange);
   }, this);
+  
+  this.subjects.forEach(function (button) {
+      button.addEventListener('change',this._onSubjectChange);
+  },this);
 };
 
 /**
@@ -69,6 +76,14 @@ Demo.prototype._getCurrentLevelFilters = function () {
   });
 };
 
+Demo.prototype._getCurrentSubjectFilters = function () {
+    return this.subjects.filter(function (input) {
+        return input.checked;
+    }).map(function (input) {
+        return input.value;
+    });
+};
+
 /**
  * A shape input check state changed, update the current filters and filte.r
  */
@@ -85,6 +100,12 @@ Demo.prototype._handleLevelChange = function () {
   this.filters.levels = this._getCurrentLevelFilters();
   this.filter();
 };
+
+Demo.prototype._handleSubjectChange = function () {
+    this.filters.subjects = this._getCurrentSubjectFilters();
+    this.filter();
+}
+
 
 /**
  * Filter shuffle based on the current state of filters.
@@ -116,9 +137,10 @@ Demo.prototype.hasActiveFilters = function () {
 Demo.prototype.itemPassesFilters = function (element) {
   var schools = this.filters.schools;
   var levels = this.filters.levels;
+  var subjects = this.filters.subjects;
   var level = element.getAttribute('data-level');
   var school = element.getAttribute('data-school');
-
+  var subject = element.getAttribute('data-subject');
   // If there are active shape filters and this shape is not in that array.
   if (schools.length > 0 && !arrayIncludes(schools, school)) {
     return false;
@@ -128,7 +150,11 @@ Demo.prototype.itemPassesFilters = function (element) {
   if (levels.length > 0 && !arrayIncludes(levels, level)) {
     return false;
   }
-
+  
+  // If there are active subject filters and this subject is not in that array
+  if (subjects.length > 0 && !arrayIncludes(subjects,subject)) {
+      return false;
+  }
   return true;
 };
 
