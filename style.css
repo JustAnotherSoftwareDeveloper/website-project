@@ -389,6 +389,7 @@ Shuffle JS
 .card {
     margin-bottom: 1%;
     margin-right: 1%;
+    background-color: #bbdefb ;
 }
     
 .card .card-action .location {
