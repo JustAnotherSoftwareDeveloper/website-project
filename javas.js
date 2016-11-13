@@ -10,20 +10,6 @@ $(document).ready(function () {
     // Plugin initialization
     $('.slider').slider();
     
-    var $grid = $('.grid').isotope({
-  itemSelector: '.element-item',
-  layoutMode: 'fitRows',
-  getSortData: {
-    name: '.name',
-    symbol: '.symbol',
-    number: '.number parseInt',
-    category: '[data-category]',
-    weight: function( itemElem ) {
-      var weight = $( itemElem ).find('.weight').text();
-      return parseFloat( weight.replace( /[\(\)]/g, '') );
-    }
-  }
-});
 
 });
 
@@ -32,7 +18,6 @@ $(document).ready(function () {
 
 var Shuffle = window.shuffle;
 
-// ES7 will have Array.prototype.includes.
 function arrayIncludes(array, value) {
   return array.indexOf(value) !== -1;
 }
@@ -42,7 +27,7 @@ function toArray(thing) {
   return Array.prototype.slice.call(thing);
 }
 
-var Demo = function (element) {
+var courseViewer = function (element) {
   this.schools = toArray(document.querySelectorAll('.js-school input'));
   this.levels = toArray(document.querySelectorAll('.js-level input'));
   this.subjects = toArray(document.querySelectorAll('.js-subject input'));
@@ -64,7 +49,7 @@ var Demo = function (element) {
 /**
  * Bind event listeners for when the filters change.
  */
-Demo.prototype._bindEventListeners = function () {
+courseViewer.prototype._bindEventListeners = function () {
   this._onSchoolChange = this._handleSchoolChange.bind(this);
   this._onLevelChange = this._handleLevelChange.bind(this);
   this._onSubjectChange = this._handleSubjectChange.bind(this);
@@ -86,7 +71,7 @@ Demo.prototype._bindEventListeners = function () {
  * Get the values of each checked input.
  * @return {Array.<string>}
  */
-Demo.prototype._getCurrentSchoolFilters = function () {
+courseViewer.prototype._getCurrentSchoolFilters = function () {
   return this.schools.filter(function (input) {
     return input.checked;
   }).map(function (input) {
@@ -98,7 +83,7 @@ Demo.prototype._getCurrentSchoolFilters = function () {
  * Get the values of each `active` button.
  * @return {Array.<string>}
  */
-Demo.prototype._getCurrentLevelFilters = function () {
+courseViewer.prototype._getCurrentLevelFilters = function () {
   return this.levels.filter(function (input) {
     return input.checked;
   }).map(function (input) {
@@ -106,7 +91,7 @@ Demo.prototype._getCurrentLevelFilters = function () {
   });
 };
 
-Demo.prototype._getCurrentSubjectFilters = function () {
+courseViewer.prototype._getCurrentSubjectFilters = function () {
     return this.subjects.filter(function (input) {
         return input.checked;
     }).map(function (input) {
@@ -117,7 +102,7 @@ Demo.prototype._getCurrentSubjectFilters = function () {
 /**
  * A shape input check state changed, update the current filters and filte.r
  */
-Demo.prototype._handleSchoolChange = function () {
+courseViewer.prototype._handleSchoolChange = function () {
   this.filters.schools = this._getCurrentSchoolFilters();
   this.filter();
 };
@@ -126,12 +111,12 @@ Demo.prototype._handleSchoolChange = function () {
  * A color button was clicked. Update filters and display.
  * @param {Event} evt Click event object.
  */
-Demo.prototype._handleLevelChange = function () {
+courseViewer.prototype._handleLevelChange = function () {
   this.filters.levels = this._getCurrentLevelFilters();
   this.filter();
 };
 
-Demo.prototype._handleSubjectChange = function () {
+courseViewer.prototype._handleSubjectChange = function () {
     this.filters.subjects = this._getCurrentSubjectFilters();
     this.filter();
 }
@@ -140,7 +125,7 @@ Demo.prototype._handleSubjectChange = function () {
 /**
  * Filter shuffle based on the current state of filters.
  */
-Demo.prototype.filter = function () {
+courseViewer.prototype.filter = function () {
   if (this.hasActiveFilters()) {
     this.shuffle.filter(this.itemPassesFilters.bind(this));
   } else {
@@ -153,7 +138,7 @@ Demo.prototype.filter = function () {
  * that means there is an active filter.
  * @return {boolean}
  */
-Demo.prototype.hasActiveFilters = function () {
+courseViewer.prototype.hasActiveFilters = function () {
   return Object.keys(this.filters).some(function (key) {
     return this.filters[key].length > 0;
   }, this);
@@ -164,7 +149,7 @@ Demo.prototype.hasActiveFilters = function () {
  * @param {Element} element Element to test.
  * @return {boolean} Whether it satisfies all current filters.
  */
-Demo.prototype.itemPassesFilters = function (element) {
+courseViewer.prototype.itemPassesFilters = function (element) {
   var schools = this.filters.schools;
   var levels = this.filters.levels;
   var subjects = this.filters.subjects;
@@ -189,7 +174,7 @@ Demo.prototype.itemPassesFilters = function (element) {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-  window.demo = new Demo(document.querySelector('.js-shuffle'));
+  window.courseViewer = new courseViewer(document.querySelector('.js-shuffle'));
 });
 
 
