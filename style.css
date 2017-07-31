@@ -5,7 +5,13 @@ Material Design Icons
 .material-icons.md-24 { font-size: 24px; color:white}
 .material-icons.md-36 { font-size: 36px; color:white}
 .material-icons.md-48 { font-size: 48px; color:white}
-.devicon-github-plain path {float:right; fill:#bbdefb}
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color:white); }
+.material-icons.md-dark.md-inactive { color: white; }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color:white }
  /*
 * Background
 */
