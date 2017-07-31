@@ -6,7 +6,7 @@ Material Design Icons
 .material-icons.md-36 { font-size: 36px; color:white}
 .material-icons.md-48 { font-size: 48px; color:white}
 /* Rules for using icons as black on a light background. */
-.material-icons.md-dark { color:white); }
+.material-icons.md-dark { color:white;) }
 .material-icons.md-dark.md-inactive { color: white; }
 
 /* Rules for using icons as white on a dark background. */
